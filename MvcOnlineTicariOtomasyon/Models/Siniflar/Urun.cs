@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web;
 
 namespace MvcOnlineTicariOtomasyon.Models.Siniflar
@@ -24,7 +25,8 @@ namespace MvcOnlineTicariOtomasyon.Models.Siniflar
 		[Column(TypeName = "Varchar")]
 		[StringLength(250)]
 		public string UrunGorsel { get; set; }
-        public Kategori Kategori { get; set; }
+		public int Kategoriid { get; set; }
+        public virtual Kategori Kategori { get; set; }
 		public ICollection<SatisHareket> SatisHarekets { get; set; }
 	}
 }
