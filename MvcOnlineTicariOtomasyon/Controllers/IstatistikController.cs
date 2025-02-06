@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using MvcOnlineTicariOtomasyon.Models.Siniflar;
 namespace MvcOnlineTicariOtomasyon.Controllers
 {
@@ -48,5 +49,53 @@ namespace MvcOnlineTicariOtomasyon.Controllers
 			ViewBag.dgr16 = deger16;
 			return View();
         }
-    }
+		public ActionResult KolayTablolar()
+		{
+			var sorgu = from x in c.Carilers
+						group x by x.CariSehir into g
+						orderby g.Count() descending
+						select new SinifGrup
+						{
+							Sehir = g.Key,
+							Sayi = g.Count()
+						};
+			return View(sorgu);
+		}
+		public PartialViewResult Partial1()
+		{
+			var sorgu2 = from x in c.Personels
+						 group x by x.Departman.DepartmanAdi into g
+						 orderby g.Count() descending
+						 select new SinifGrup2
+						 {
+							 Departman = g.Key,
+							 Sayi = g.Count()
+					   };
+			return PartialView(sorgu2);
+		}
+		public PartialViewResult Partial2()
+		{
+			var sorgu = c.Carilers.ToList();
+			return PartialView(sorgu);
+		}
+		public PartialViewResult Partial3()
+		{
+			var sorgu = c.Uruns.ToList();
+			return PartialView(sorgu);
+		}
+		public PartialViewResult Partial4()
+		{
+			var sorgu3 = from x in c.Uruns
+						 group x by x.Marka into g
+						 
+						 select new SinifGrup3
+						 {
+							 Marka = g.Key,
+							 Sayi = g.Count()
+						 };
+			
+			return PartialView(sorgu3);
+
+		}
+	}
 }
