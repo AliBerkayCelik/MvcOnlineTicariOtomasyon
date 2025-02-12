@@ -126,12 +126,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <p></p>
                     <div class="clear"></div>
                     <div class="login-agileits-top">
-                        <form action="#" method="post">
+                        @using (Html.BeginForm("AdminLogin", "Login", FormMethod.Post))
+                        {
+
                             <input type="text" class="name" name="KullaniciAd" Placeholder="Kullanıcı Adı" required="" />
                             <input type="password" class="password" name="Sifre" Placeholder="Şifre" required="" />
-                            <input type="email" class="email" name="email" Placeholder="Email" required="" />
+                            
                             <input type="submit" value="Giriş Yap">
-                        </form>
+                        }
+
                     </div>
                 </div>
             </div>

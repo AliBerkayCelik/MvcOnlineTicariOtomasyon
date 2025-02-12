@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PagedList;
+using PagedList.Mvc;
 using System.Web.Mvc;
 using MvcOnlineTicariOtomasyon.Models.Siniflar;
 
@@ -11,11 +13,17 @@ namespace MvcOnlineTicariOtomasyon.Controllers
     {
         // GET: Urun
         Context c = new Context();
-        public ActionResult Index()
+        public ActionResult Index(string p,int sayfa=1)
         {
-            var urunler = c.Uruns.Where(x=>x.Durum==true).ToList();
-            return View(urunler);
-        }
+			var urunler = c.Uruns.OrderBy(x => x.UrunID).Where(y=>y.Durum==true);
+
+			if (!string.IsNullOrEmpty(p))
+			{
+				urunler = (IOrderedQueryable<Urun>)urunler.Where(y => y.UrunAd.Contains(p));
+			}
+
+			return View(urunler.ToPagedList(sayfa, 6));
+		}
         [HttpGet]
         public ActionResult YeniUrun()
         {
