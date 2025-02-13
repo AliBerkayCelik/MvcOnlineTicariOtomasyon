@@ -18,7 +18,7 @@
         <th>Toplam</th>
         <th>Güncelle</th>
         <th>Detay</th>
-        <th>Popup Liste</th>
+      
         <th>Yeni Kalem</th>
     </tr>
     @foreach (var fatura in Model)
@@ -35,11 +35,41 @@
             <td>@fatura.Toplam</td>
             <td><a href="/Fatura/FaturaGetir/@fatura.FaturaID" class="btn btn-warning">Güncelle</a></td>
             <td><a href="/Fatura/FaturaDetay/@fatura.FaturaID" class="btn btn-success">Detaylar</a></td>
-            <td><a href="/Fatura/FaturaDetay/@fatura.FaturaID" style="background-color:burlywood" class="btn btn-default">Popup Liste</a></td>
+            
             <td><a href="/Fatura/FaturaDetay/@fatura.FaturaID" style="background-color:darkcyan" class="btn btn-default">Yeni Kalem</a></td>
         </tr>
     }
 </table>
 <a href="/Fatura/FaturaEkle/" class="btn btn-primary">Yeni Fatura Girişi</a>
+<br /> <br />
+<button style="background-color:red" type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal1">Popup Penceresi</button>
 
+<div class="modal" id="modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Popop Dialog Ekranı</h2>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <td>Seri No</td>
+                        <td>Sıra No</td>
+                        <td>Tutar</td>
+                    </tr>
+                    @foreach (var x in Model)
+                    {
+                        <tr>
+                            <td>@x.FaturaSeriNo</td>
+                            <td>@x.FaturaSiraNo</td>
+                            <td>@x.Toplam</td>
+                        </tr>
+                    }
 
+                </table>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Tamam</button>
+              
+            </div>
+        </div>
+    </div>
+</div>
