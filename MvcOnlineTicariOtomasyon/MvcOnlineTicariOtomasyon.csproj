@@ -2928,6 +2928,7 @@
     <Content Include="Views\CariPanel\Index.cshtml" />
     <Content Include="Views\CariPanel\Siparislerim.cshtml" />
     <Content Include="Views\Alertler\Index.cshtml" />
+    <Content Include="Views\Urun\SatisYap.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
