@@ -27,5 +27,56 @@ namespace MvcOnlineTicariOtomasyon.Controllers
             var degerler = c.SatisHarekets.Where(x => x.Cariid == id).ToList();
 			return View(degerler);
         }
-    }
+        public ActionResult GelenMesajlar()
+        {
+			var mail = (string)Session["CariMail"];
+			var mesajlar = c.Mesajlars.Where(x=>x.Alici==mail).OrderByDescending(x => x.MesajID).ToList();
+			var gidenSayisi = c.Mesajlars.Count(x => x.Gonderici == mail).ToString();
+			ViewBag.d2 = gidenSayisi;
+			var gelenSayisi = c.Mesajlars.Count(x => x.Alici == mail).ToString();
+            ViewBag.d1 = gelenSayisi;
+            return View(mesajlar);
+        }
+		public ActionResult GidenMesajlar()
+		{
+			var mail = (string)Session["CariMail"];
+			var mesajlar = c.Mesajlars.Where(x => x.Gonderici == mail).OrderByDescending(x=>x.MesajID).ToList();
+			var gelenSayisi = c.Mesajlars.Count(x => x.Alici == mail).ToString();
+			ViewBag.d1 = gelenSayisi;
+			var gidenSayisi = c.Mesajlars.Count(x => x.Gonderici == mail).ToString();
+			ViewBag.d2 = gidenSayisi;
+			return View(mesajlar);
+		}
+		public ActionResult MesajDetay(int id)
+		{
+			var degerler = c.Mesajlars.Where(x => x.MesajID == id).ToList();
+			var mail = (string)Session["CariMail"];
+			var gidenSayisi = c.Mesajlars.Count(x => x.Gonderici == mail).ToString();
+			ViewBag.d2 = gidenSayisi;
+			var gelenSayisi = c.Mesajlars.Count(x => x.Alici == mail).ToString();
+			ViewBag.d1 = gelenSayisi;
+			return View(degerler);
+		}
+
+		[HttpGet]
+		public ActionResult YeniMesaj()
+		{
+			var mail = (string)Session["CariMail"];
+			var gidenSayisi = c.Mesajlars.Count(x => x.Gonderici == mail).ToString();
+			ViewBag.d2 = gidenSayisi;
+			var gelenSayisi = c.Mesajlars.Count(x => x.Alici == mail).ToString();
+			ViewBag.d1 = gelenSayisi;
+			return View();
+		}
+		[HttpPost]
+		public ActionResult YeniMesaj(mesajlar m)
+		{
+			var mail = (string)Session["CariMail"];
+			m.Tarih = DateTime.Parse(DateTime.Now.ToShortDateString());
+			m.Gonderici = mail;
+			c.Mesajlars.Add(m);
+			c.SaveChanges();
+			return View();
+		}
+	}
 }
