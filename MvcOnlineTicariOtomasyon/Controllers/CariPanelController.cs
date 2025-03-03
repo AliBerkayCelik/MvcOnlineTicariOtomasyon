@@ -16,9 +16,20 @@ namespace MvcOnlineTicariOtomasyon.Controllers
         public ActionResult Index()
         {
             var mail = (string)Session["CariMail"];
-            var degerler = c.Carilers.FirstOrDefault(x => x.CariMail == mail);
+			
+			var degerler = c.Mesajlars.Where(x => x.Alici == mail).ToList();
             ViewBag.dgr = mail;
-            return View(degerler);
+			var mailid = c.Carilers.Where(x => x.CariMail == mail).Select(y => y.CariID).FirstOrDefault();
+			ViewBag.mid = mailid;
+			var toplamSatis = c.SatisHarekets.Where(x => x.Cariid == mailid).Count();
+			ViewBag.ts = toplamSatis;
+			var toplamTutar = c.SatisHarekets.Where(x => x.Cariid == mailid).Sum(y => y.ToplamTutar);
+			ViewBag.tt = toplamTutar;
+			var toplamUrun = c.SatisHarekets.Where(x => x.Cariid == mailid).Sum(y => y.Adet);
+			ViewBag.tu = toplamUrun;
+			var adsoyad = c.Carilers.Where(x => x.CariMail == mail).Select(y => y.CariAd + " " + y.CariSoyad).FirstOrDefault();
+			ViewBag.ad = adsoyad;
+			return View(degerler);
             
         }
         public ActionResult Siparislerim()
@@ -100,5 +111,22 @@ namespace MvcOnlineTicariOtomasyon.Controllers
 			Session.Abandon();
 			return RedirectToAction("Index", "Login");
 		}
+		public PartialViewResult Partial1()
+		{
+			var mail = (string)Session["CariMail"];
+			var id = c.Carilers.Where(x => x.CariMail == mail).Select(y => y.CariID).FirstOrDefault();
+			var cariBul = c.Carilers.Find(id);
+			return PartialView("Partial1",cariBul);
+		}
+		public ActionResult CariBilgiGuncelle(Cariler cr)
+		{
+			var cari = c.Carilers.Find(cr.CariID);
+			cari.CariAd = cr.CariAd;
+			cari.CariSoyad = cr.CariSoyad;
+			cari.CariSifre = cr.CariSifre;
+			c.SaveChanges();
+			return RedirectToAction("Index");
+		}
+		
 	}
 }
