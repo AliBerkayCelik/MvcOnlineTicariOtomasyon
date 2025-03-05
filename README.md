@@ -41,8 +41,6 @@ Bu proje ASP.NET MVC 5, MSSQL Server ve Entity Framework (Code First) teknolojil
 
 🔹 Müşteri Yönetimi – Carilerin alışveriş geçmişi ve detaylı müşteri takibi
 
-🔹 Kargo Takibi – Kargo takip kodu ile kargonun durumunu sorgulama
-
 🔹 Ürün Görselleri – Ürünlere ait resimlerin sisteme eklenmesi
 
 🔹 İstatistikler & Grafikler – Google Charts entegrasyonu ile verilerin görselleştirilmesi
@@ -59,8 +57,6 @@ Bu proje ASP.NET MVC 5, MSSQL Server ve Entity Framework (Code First) teknolojil
 📌 Sipariş Detayları – Sipariş edilen ürünler ve toplam tutar bilgisi
 
 📌 Profil Yönetimi – Kullanıcı bilgilerini düzenleme
-
-📌 Kargo Takibi – QR kod veya takip numarası ile kargo durumu sorgulama
 
 📌 Mesajlaşma – Sistem içi mesaj gönderme ve alma
 
