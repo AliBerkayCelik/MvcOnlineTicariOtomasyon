@@ -140,6 +140,14 @@
 
                             Ürün Detay
                         </a>
+                        @if (User.IsInRole("A"))
+                        {
+                            <a class="nav-link" href="/QR/Index/">
+
+                                Kod Oluştur
+                            </a>
+                        }
+
                     </div>
                 </div>
                 <div class="sb-sidenav-footer">
