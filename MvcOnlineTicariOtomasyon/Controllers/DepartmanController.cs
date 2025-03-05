@@ -16,6 +16,7 @@ namespace MvcOnlineTicariOtomasyon.Controllers
             var deger = c.Departmans.Where(x=>x.Durum==true).ToList();
             return View(deger);
         }
+        [Authorize(Roles ="A")]
         [HttpGet]
         public ActionResult DepartmanEkle()
         {
